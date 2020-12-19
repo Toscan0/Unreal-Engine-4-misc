@@ -38,12 +38,19 @@ public:
 		float power;
 
 	UPROPERTY(EditAnywhere)
-		float power_Treshold;
+		float power_treshold;
 
 	UFUNCTION()
 		void OnBeginOverlap(class UPrimitiveComponent *hitComp,
 			class AActor *otherActor, class  UPrimitiveComponent *otherComp,
 			int32 otherBodyIndex, bool bFromSweep, const FHitResult &sweepResult);
+
+	UPROPERTY(EditAnywhere, Category = "UI HUD")
+		TSubclassOf<UUserWidget> PlayerPower_Widget_Class;
+	UUserWidget *PlayerPower_Widget;
+
+	void RestartGame();
+
 
 protected:
 	// Called when the game starts or when spawned
