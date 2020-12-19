@@ -23,6 +23,28 @@ public:
 	// Sets default values for this character's properties
 	ABatteryMan();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		USpringArmComponent *CameraBoom;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		UCameraComponent *FollowCamera;
+
+	void MoveForward(float Axis);
+	void MoveRight(float Axis);
+
+	bool bDead;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		float power;
+
+	UPROPERTY(EditAnywhere)
+		float power_Treshold;
+
+	UFUNCTION()
+		void OnBeginOverlap(class UPrimitiveComponent *hitComp,
+			class AActor *otherActor, class  UPrimitiveComponent *otherComp,
+			int32 otherBodyIndex, bool bFromSweep, const FHitResult &sweepResult);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
