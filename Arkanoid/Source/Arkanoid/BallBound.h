@@ -4,35 +4,34 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
-#include "Ball.h"
-#include "Brick.generated.h"
+#include "Kismet/GameplayStatics.h"
+#include "Paddle_PlayerController.h"
+#include "BallBound.generated.h"
 
 class UBoxComponent;
+class APaddle_PlayerController;
 
 UCLASS()
-class ARKANOID_API ABrick : public AActor
+class ARKANOID_API ABallBound : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABrick();
+	ABallBound();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		UStaticMeshComponent *sm_brick;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UBoxComponent *box_collision;
-	float speedModifierOnBounce = 1.01f;
 	UFUNCTION()
 		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
 			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndexType, bool bFromSweep,
 			const FHitResult& SweepResult);
-	void DestroyBrick();
+
+	APaddle_PlayerController *playerController_REF;
 
 public:	
 	// Called every frame
